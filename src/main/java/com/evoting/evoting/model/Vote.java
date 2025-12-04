@@ -2,12 +2,11 @@ package com.evoting.evoting.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 
-@Data
 @Entity
-@Table(name = "vote_records")
-public class VoteRecord {
+@Data
+@Table(name = "votes")
+public class Vote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,4 @@ public class VoteRecord {
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
-
-    private String blockchainTxHash;
-    private LocalDateTime voteTime;
 }

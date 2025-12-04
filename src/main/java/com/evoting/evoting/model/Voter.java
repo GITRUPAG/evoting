@@ -34,7 +34,7 @@ public class Voter {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private boolean hasVoted = false;
+    //private boolean hasVoted = false;
 
     @ManyToOne
     @JoinColumn(name = "election_id")

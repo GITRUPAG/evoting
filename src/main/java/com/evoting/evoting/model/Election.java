@@ -3,6 +3,7 @@ package com.evoting.evoting.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -28,9 +29,13 @@ public class Election {
     private Long id;
 
     private String title;
-
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime endTime;
+
+    private String description;
+
 
     private String status; // Upcoming, Ongoing, Completed
 

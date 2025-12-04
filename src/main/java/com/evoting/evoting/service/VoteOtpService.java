@@ -1,15 +1,15 @@
 package com.evoting.evoting.service;
 
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Service;
+
 import com.evoting.evoting.model.VoteOtp;
 import com.evoting.evoting.model.Voter;
 import com.evoting.evoting.repository.VoteOtpRepository;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import jakarta.transaction.Transactional; // ✅ IMPORTANT
-
-import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -17,19 +17,24 @@ public class VoteOtpService {
 
     private final VoteOtpRepository voteOtpRepository;
 
-    @Transactional
-    public VoteOtp createOtp(Voter voter, String otp) {
+   @Transactional
+public VoteOtp createOtp(Voter voter, String otp) {
 
-        // Delete existing OTP if present
-        voteOtpRepository.deleteByVoter(voter);
+    VoteOtp existing = voteOtpRepository.findByVoter(voter).orElse(null);
 
-        VoteOtp voteOtp = new VoteOtp();
-        voteOtp.setVoter(voter);
-        voteOtp.setOtp(otp);
-        voteOtp.setExpiryTime(LocalDateTime.now().plusMinutes(5));
-
-        return voteOtpRepository.save(voteOtp);
+    if (existing != null) {
+        existing.setOtp(otp);
+        existing.setExpiryTime(LocalDateTime.now().plusMinutes(5));
+        return voteOtpRepository.save(existing);
     }
+
+    VoteOtp voteOtp = new VoteOtp();
+    voteOtp.setVoter(voter);
+    voteOtp.setOtp(otp);
+    voteOtp.setExpiryTime(LocalDateTime.now().plusMinutes(5));
+
+    return voteOtpRepository.save(voteOtp);
+}
 
     public boolean verifyOtp(Voter voter, String otp) {
         return voteOtpRepository.findByVoter(voter)

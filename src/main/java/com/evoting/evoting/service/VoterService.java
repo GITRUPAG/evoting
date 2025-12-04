@@ -40,14 +40,7 @@ public class VoterService {
         return found.get();
     }
 
-    public boolean hasVoted(Voter voter) {
-        return voter.isHasVoted();
-    }
-
-    public void markAsVoted(Voter voter) {
-        voter.setHasVoted(true);
-        voterRepository.save(voter);
-    }
+    
 
     public Voter assignToElection(Voter voter, Election election) {
         voter.setElection(election);

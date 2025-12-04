@@ -8,4 +8,7 @@ import java.util.List;
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     List<Candidate> findByElection(Election election);
+
+    List<Candidate> findByElectionId(Long electionId);
+
 }
