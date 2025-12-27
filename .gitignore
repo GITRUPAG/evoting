@@ -74,7 +74,7 @@ build/
 Thumbs.db
 <<<<<<< HEAD
 
-src/main/resources/application.properties
-src/main/resources/application-*.properties
+#src/main/resources/application.properties
+#src/main/resources/application-*.properties
 =======
 >>>>>>> c6c68fa9dfb215d9d6cd560cf01907207259dbad
